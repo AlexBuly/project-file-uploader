@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("node:path");
-const passport = require("passport");
+const passport = require("./lib/passport");
 require("dotenv").config();
 const app = express();
 
@@ -28,17 +28,16 @@ app.use(
   })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 const loginRouter = require("./routes/loginRouter");
 const signupRouter = require("./routes/signupRouter");
+const indexRouter = require("./routes/indexRouter");
 
 app.use("/login", loginRouter);
 app.use("/sign-up", signupRouter);
-
-app.use(passport.session());
-
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-})
+app.use("/", indexRouter)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
