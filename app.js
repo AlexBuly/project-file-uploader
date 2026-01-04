@@ -28,6 +28,12 @@ app.use(
   })
 );
 
+const loginRouter = require("./routes/loginRouter");
+const signupRouter = require("./routes/signupRouter");
+
+app.use("/login", loginRouter);
+app.use("/sign-up", signupRouter);
+
 app.use(passport.session());
 
 app.get("/", (req, res) => {
