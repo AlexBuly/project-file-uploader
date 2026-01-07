@@ -6,8 +6,9 @@
     <title><%= title %></title>
 </head>
 <body>
+    <%- include('partials/header') %>
     <h1><%= title %></h1>
-    <form action="/login" method="POST">
+    <form action="/sign-up" method="POST">
         <label for="username">Username</label>
         <input type="text" name="username" id="username">
         <br><br>
