@@ -10,7 +10,7 @@ const getSignupForm = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
     const { username, password } = req.body;
 
     try {
@@ -26,6 +26,7 @@ const createUser = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send("Signup error");
+        next(err);
     }
 }
 
