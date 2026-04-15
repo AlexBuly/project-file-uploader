@@ -8,5 +8,8 @@
 <body>
     <%- include('partials/header') %>
     <h1><%= title %></h1>
+    <% if (user) { %>
+    <h2>Welcome, <%= user.username %>!</h2>
+<% } %>
 </body>
 </html>
