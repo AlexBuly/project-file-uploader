@@ -1,5 +1,13 @@
 <div class="navbar">
     <a href="/">Home</a>
-    <a href="/login">Login</a>
-    <a href="/sign-up">Sign Up</a>
+
+    <% if (user) { %>
+        <form action="/logout" method="POST" style="display:inline;">
+            <button type="submit">Logout</button>
+        </form>
+    <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/sign-up">Sign Up</a>
+        <a href="/file">Upload</a>
+    <% } %>
 </div>
