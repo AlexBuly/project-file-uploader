@@ -34,10 +34,19 @@ app.use(passport.session());
 const loginRouter = require("./routes/loginRouter");
 const signupRouter = require("./routes/signupRouter");
 const indexRouter = require("./routes/indexRouter");
+const fileRouter = require("./routes/fileRouter");
+const logoutRouter = require("./routes/logoutRouter");
+
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
 
 app.use("/login", loginRouter);
 app.use("/sign-up", signupRouter);
-app.use("/", indexRouter)
+app.use("/", indexRouter);
+app.use("/file", fileRouter);
+app.use("/", logoutRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
