@@ -1,3 +1,5 @@
+const upload = require("../middleware/upload");
+
 const getUploader = async (req, res) => {
     try {
         res.render("file-upload", {title: "Upload a File"});
@@ -7,6 +9,18 @@ const getUploader = async (req, res) => {
     }
 }
 
+const fileUpload = async (req, res) => {
+    try {
+        console.log(req.file);
+
+        res.send("File uploaded successfully!");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Upload failed");
+    }
+};
+
 module.exports = {
-    getUploader
+    getUploader,
+    fileUpload
 }
