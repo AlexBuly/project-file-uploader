@@ -8,6 +8,10 @@
 <body>
     <%- include('partials/header') %>
     <h1><%= title %></h1>
-    <input type="file">
+    <form action="/file" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required />
+        <button type="submit">Upload</button>
+    </form>
+
 </body>
 </html>
