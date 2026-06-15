@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folder</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+   <h1>Folders</h1>
+    <form method="POST" action="/folders">
+    <input name="name" placeholder="New folder" required />
+    <button>Create</button>
+    </form>
+
+    <ul>
+    <% folders.forEach(folder => { %>
+        <li>
+        <a href="/folders/<%= folder.id %>">
+            <%= folder.name %>
+        </a>
+        </li>
+    <% }) %>
+</ul>
+</body>
+</html>
