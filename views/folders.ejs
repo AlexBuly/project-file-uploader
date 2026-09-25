@@ -19,8 +19,57 @@
         <a href="/folders/<%= folder.id %>">
             <%= folder.name %>
         </a>
+        <button type="button" onclick="toggleUpdate('<%= folder.id %>')">
+            Update
+        </button>
+
+          <form
+                method="POST"
+                action="/folders/<%= folder.id %>/delete"
+                style="display: inline;"
+                >
+                <button type="submit">Delete</button>
+            </form>
+
+        <form
+            id="update-<%= folder.id %>"
+            method="POST"
+            action="/folders/<%= folder.id %>/update"
+            style="display: none;"
+            >
+
+            <input 
+                type="text" 
+                name="name" 
+                value="<%= folder.name %>" required
+            />
+            <button type="submit">Save</button>
+
+            <button 
+                type="button"
+                onclick="closeUpdate('<%= folder.id %>')"
+                onmouseover=""
+                >
+                X
+            </button>
+        </form>
         </li>
     <% }) %>
 </ul>
+<script>
+    // updates folder
+    const toggleUpdate = (folderId) => {
+        const form = document.getElementById(`update-${folderId}`);
+
+        form.style.display === "none" ? form.style.display = "inline" : 
+        form.style.display = "none";
+    }
+
+    // closes update
+    const closeUpdate = (folderId) => {
+        const form = document.getElementById(`update-${folderId}`);
+        form.style.display = "none";
+    }
+</script>
 </body>
 </html>
