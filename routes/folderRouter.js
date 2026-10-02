@@ -22,6 +22,18 @@ router.post(
   folderController.uploadFile
 );
 
+router.get(
+    "/files/:id",
+    isAuthenticated,
+    folderController.readSingleFile
+);
+
+router.get(
+    "/files/:id/download",
+    isAuthenticated,
+    folderController.downloadFile
+);
+
 // Delete file
 router.post(
   "/files/:id/delete",

@@ -33,6 +33,38 @@ const createFolder = async (req, res) => {
   res.render("folder", { folder });
  }
 
+ const readSingleFile = async (req, res) => {
+    const file = await prisma.file.findUnique({
+        where: { id: req.params.id },
+    });
+
+    if (!file || file.userId !== req.user.id) {
+        return res.status(403).send("Forbidden");
+    }
+
+    const stats = fs.statSync(file.path);
+
+    const fileSize = (stats.size / 1024).toFixed(2);
+
+    res.render("file", { file, fileSize });
+};
+
+const downloadFile = async (req, res) => {
+  const file = await prisma.file.findUnique({
+        where: { id: req.params.id },
+    });
+
+     if (!file || file.userId !== req.user.id) {
+        return res.status(403).send("Forbidden");
+    }
+
+    res.download(file.path, file.filename, (err) => {
+      if (err) {
+        console.error("Download error:", err);
+      }
+    })
+}
+
  const updateFolder = async (req, res) => {
     await prisma.folder.update({
     where: { id: req.params.id },
@@ -112,5 +144,7 @@ module.exports = {
    updateFolder,
    deleteFolder,
    uploadFile,
-   deleteFile
+   deleteFile,
+   readSingleFile,
+   downloadFile
 }
